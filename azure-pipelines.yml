@@ -42,7 +42,7 @@ jobs:
   - checkout: self
   - task: GoTool@0
     inputs:
-      version: '1.14.1'
+      version: '1.14.4'
   - script: |
       bash ./testing/coverage/coverall
     workingDirectory: '$(Build.SourcesDirectory)'
@@ -66,7 +66,7 @@ jobs:
   - checkout: self
   - task: GoTool@0
     inputs:
-      version: '1.14.1'
+      version: '1.14.4'
   - script: |
       mkdir triggersrc
       ls -I "triggersrc" | xargs cp -rf -t triggersrc
@@ -119,6 +119,10 @@ jobs:
       GITHUB_TOKEN: $(GITHUB_TOKEN)
       PRERELEASE: true
       RELEASE_TAG: unstable-$(Build.SourceVersion)
+      RELEASE_SHA: $(Build.SourceVersion)
+      TRIGGER_REASON: $(Build.SourceBranch)
+      GITHUB_REPO_OWNER: v2fly
+      GITHUB_REPO_NAME: v2ray-core
   - script: |
       cd ./src/v2ray.com/core
       echo $RELEASE_TAG
